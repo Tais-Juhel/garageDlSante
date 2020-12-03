@@ -4,12 +4,12 @@
             <tr class="info">
                 <td class="label">Name:</td>
                 <td class="data">{{ name }}</td>
-                <td class="updateButton" @click="updateName">Modifier</td>
+                <td class="updateButton" @click="updateName">Edit</td>
             </tr>
             <tr class="info">
                 <td class="label">First Name:</td>
                 <td class="data">{{ firstName }}</td>
-                <td class="updateButton" @click="updateFirstName">Modifier</td>
+                <td class="updateButton" @click="updateFirstName">Edit</td>
             </tr>
         </table>
     </div>
