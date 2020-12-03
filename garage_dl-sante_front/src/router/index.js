@@ -34,6 +34,11 @@ const routes = [
     path: '/car/:id',
     name: 'CarEdit',
     component: () => import('../views/Edit.vue')
+  },
+  {
+    path: '/car/add',
+    name: 'AddCar',
+    component: () => import('../views/AddCar.vue')
   }
 ]
 
