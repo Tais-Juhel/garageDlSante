@@ -6,7 +6,7 @@
     </div>
 
     <router-link class="toLogIn" to="/logIn">I already have an account - Log in</router-link>
-    <button class="submit" type="submit">Register</button>
+    <button class="submit" @click="submit">Register</button>
   </form>
 </template>
 

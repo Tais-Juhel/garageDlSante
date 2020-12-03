@@ -8,7 +8,7 @@
     </div>
 
     <router-link class="toRegister" to="/register">I don't have an account - Register</router-link>
-    <button class="submit" type="submit">Log In</button>
+    <button class="submit" @click="submit">Log In</button>
   </form>
 </template>
 
@@ -21,6 +21,11 @@ export default {
       firstName: '',
       username: '',
       password: ''
+    }
+  },
+  methods: {
+    submit() {
+      
     }
   }
 }

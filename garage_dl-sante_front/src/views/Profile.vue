@@ -1,20 +1,20 @@
 <template>
-  <div class="Register">
-    <RegisterVue/>
-  </div>
+    <div class="profile">
+        <ProfilVue/>
+    </div>
 </template>
 
 <script>
-import RegisterVue from '../components/Register.vue'
+import ProfilVue from '../components/Profile'
 
 export default {
-  name: 'Register',
-  components: { RegisterVue },
+    name: 'profile',
+    components: { ProfilVue }
 }
 </script>
 
 <style lang="scss">
-.Register{
+.profile{
   position: absolute;
   top: 0;
   z-index: -1;
