@@ -1,24 +1,20 @@
 <template>
-  <form id="logInVue" @submit="logIn">
+  <form id="registerVue" @submit="register">
     <div class="input">
-      <input id="name" type="text" placeholder="Name" v-model="name">
-      <input id="firstName" type="text" placeholder="First Name" v-model="firstName">
       <input id="username" type="text" placeholder="Username" v-model="username">
       <input id="password" type="password" placeholder="Password" v-model="password">
     </div>
 
-    <router-link class="toRegister" to="/register">I don't have an account - Register</router-link>
-    <button class="submit" type="submit">Log In</button>
+    <router-link class="toLogIn" to="/logIn">I already have an account - Log in</router-link>
+    <button class="submit" type="submit">Register</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'logInVue',
+  name: 'registerVue',
   data: function() {
     return {
-      name: '',
-      firstName: '',
       username: '',
       password: ''
     }
@@ -28,7 +24,7 @@ export default {
 
 
 <style lang="scss">
-#logInVue{
+#registerVue{
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -54,13 +50,13 @@ export default {
     }
   }
 
-  .toRegister{
+  .toLogIn{
     margin-top: 40px;
     color: grey;
     font-size: 12px;
     text-decoration: none;
   }
-  .toRegister:hover{
+  .toLogIn:hover{
     text-decoration: underline;
     cursor: pointer;
   }

@@ -22,5 +22,6 @@ export default {
   width: 100vw;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 </style>
