@@ -2,7 +2,7 @@
     <div class="Garage">
         <div class="garage">
             <table>
-                <GarageVue v-for="item in garage" :key="item" :id="item.id" :brand="item.brand" :serialNumber="item.serialNumber"/>
+                <GarageVue v-for="item in garage" :key="item" :id="item.carId" :brand="item.carBrand" :serialNumber="item.carSerialNumber"/>
             </table>
 
             <router-link class="addCar" to="/car/add">Add +</router-link>
@@ -10,28 +10,24 @@
     </div>
 </template>
 
+
 <script>
 import GarageVue from '../components/Garage.vue'
+import axios from 'axios'
 
 export default {
     name: 'garage',
     components: { GarageVue },
-    data: function() {
+    data() {
         return {
-            garage: [
-                {
-                    id: 1,
-                    brand: 'Honda',
-                    serialNumber: '1515Z5FA983'
-                },
-                {
-                    id:2,
-                    brand: 'Renault',
-                    serialNumber: '1889D2HT56'
-                }
-            ]
+            garage: []
         }
-    }
+    },
+    mounted () {
+        axios
+        .get('http://localhost:3000/car/')
+        .then((res) => {this.garage = res.data})
+  }
 }
 </script>
 
