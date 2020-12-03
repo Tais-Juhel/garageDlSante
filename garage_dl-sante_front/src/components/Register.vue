@@ -1,11 +1,10 @@
 <template>
   <form id="registerVue" @submit="register">
     <div class="input">
-      <input id="username" type="text" placeholder="Username" v-model="username">
-      <input id="password" type="password" placeholder="Password" v-model="password">
+      <input id="username" type="text" placeholder="Username" v-model="name">
+      <input id="password" type="text" placeholder="Password" v-model="firstName">
     </div>
 
-    <router-link class="toLogIn" to="/logIn">I already have an account - Log in</router-link>
     <button class="submit" @click="submit">Register</button>
   </form>
 </template>
@@ -15,8 +14,8 @@ export default {
   name: 'registerVue',
   data: function() {
     return {
-      username: '',
-      password: ''
+      name: '',
+      firstName: ''
     }
   }
 }

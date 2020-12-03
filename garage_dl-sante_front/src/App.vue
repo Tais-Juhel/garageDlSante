@@ -1,6 +1,5 @@
 <template>
   <div id="nav">
-    <router-link to="/login">LogIn</router-link> |
     <router-link to="/register">Register</router-link> |
     <router-link to="/profile">Profile</router-link> |
     <router-link to="/garage">Garage</router-link>
