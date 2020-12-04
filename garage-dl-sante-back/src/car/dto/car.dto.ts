@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, ApiRequestTimeoutResponse } from '@nestjs/swagger'
 
 export class CarDto {
     @ApiProperty({
@@ -10,4 +10,9 @@ export class CarDto {
         required: true
     })
     readonly carSerialNumber: string 
+
+    @ApiProperty({
+        required: true
+    })
+    readonly customerId: number
 }

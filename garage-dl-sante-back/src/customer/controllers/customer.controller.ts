@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { CustomerService } from '../services/customer.service'
 import { Customer } from '../customer.entity'
 import { CustomerDto } from '../dto/customer.dto'
+import { Car } from '../../car/car.entity'
+import { CarDto } from '../../car/dto/car.dto'
 
 @Controller('customer')
 export class CustomerController {
@@ -15,6 +17,11 @@ export class CustomerController {
     @Get('/:id')
     getOne(@Param('id') id: number): Promise<Customer> {
         return this.customerService.read(id)
+    }
+
+    @Get('/:id/car')
+    getAllCarsOfCustomer(@Param('id') id: number): Promise<Car[]> {
+        return this.customerService.findAllCarsOfCustomer(id)
     }
 
     @Post()

@@ -8,6 +8,9 @@ export class Car {
     @Column()
     carBrand: String;
 
-    @Column('text')
+    @Column()
     carSerialNumber: String
+
+    @Column()
+    customerId: number
 }

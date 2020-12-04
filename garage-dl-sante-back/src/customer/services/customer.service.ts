@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Customer } from '../customer.entity'
 import { CustomerDto } from '../dto/customer.dto'
+import { Car } from '../../car/car.entity'
 
 
 @Injectable()
@@ -10,6 +11,8 @@ export class CustomerService {
     constructor(
         @InjectRepository(Customer)
         private readonly customerRepository: Repository<Customer>,
+        @InjectRepository(Car)
+        private readonly carRepository: Repository<Car>
     ) {}
 
     async findAll(): Promise<Customer[]> {
@@ -20,12 +23,16 @@ export class CustomerService {
         return await this.customerRepository.findOne({ where: { customerId }})
     }
 
+    async findAllCarsOfCustomer(customerId: number): Promise<Car[]> {
+        return await this.carRepository.find({ where: { customerId }})
+    }
+
     async create(customerDto: CustomerDto){
-        const customer = new Customer()
-        customer.customerName = customerDto.customerName
-        customer.customerFirstName = customerDto.customerFirstName
-        await this.customerRepository.save(customer)
-        return customer
+        const customerEntity = new Customer()
+        customerEntity.customerName = customerDto.customerName
+        customerEntity.customerFirstName = customerDto.customerFirstName
+        await this.customerRepository.save(customerEntity)
+        return customerEntity
     }
 
     async update(customerId: number, data: Partial<CustomerDto>) {

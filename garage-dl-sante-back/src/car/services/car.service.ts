@@ -23,6 +23,7 @@ export class CarService {
         const carEntity = new Car();
         carEntity.carBrand = carDto.carBrand;
         carEntity.carSerialNumber = carDto.carSerialNumber;
+        carEntity.customerId = carDto.customerId;
         const car = this.carRepository.create(carEntity);
         await this.carRepository.save(car);
         return car;
