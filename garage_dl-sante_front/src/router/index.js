@@ -2,17 +2,26 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/1'
+  },
+  {
+    path: '/:id',
+    name: 'Home',
+    component: () => import('../views/HomePage.vue')
+  },
+  {
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/profile',
+    path: '/:id/profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue')
   },
   {
-    path: '/garage',
+    path: '/:id/garage',
     name: 'Garage',
     component: () => import('../views/Garage.vue')
   },
@@ -22,7 +31,7 @@ const routes = [
     component: () => import('../views/Edit.vue')
   },
   {
-    path: '/car/add',
+    path: '/:id/car/add',
     name: 'AddCar',
     component: () => import('../views/AddCar.vue')
   }

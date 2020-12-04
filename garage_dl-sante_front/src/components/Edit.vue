@@ -1,20 +1,40 @@
 <template>
     <div class="editCarVue">
-        <input class="inputText" type="text" name="brand" id="brand" v-model="brand">
-        <input class="inputText" type="text" name="serialNumber" id="serialNumber" v-model="serialNumber">
+        <input class="inputText" type="text" name="brand" id="brand" v-model="car.carBrand">
+        <input class="inputText" type="text" name="serialNumber" id="serialNumber" v-model="car.carSerialNumber">
 
         <input id="update" type="button" value="Update" @click="updateCar">
+        <p id="comfirmMsg"></p>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'editCarVue',
     data: function() {
         return {
-            brand: 'Honda',
-            serialNumber: '1541ZFZF49T'
+            car: [],
+            carId: 0
         }
+    },
+    methods: {
+        updateCar() {
+            document.getElementById('comfirmMsg').innerHTML = ""
+
+            axios
+            .put(`http://localhost:3000/car/${ this.carId }`, this.car)
+
+            setTimeout(() => {document.getElementById('comfirmMsg').innerHTML = "The car has been updated"}, 500)
+        }
+    },
+    mounted() {
+        this.carId = window.location.hash.replace('#/car/','')
+
+        axios
+        .get(`http://localhost:3000/car/${ this.carId }`)
+        .then(res => {this.car = res.data})
     }
 }
 </script>

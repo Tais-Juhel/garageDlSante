@@ -1,20 +1,42 @@
 <template>
     <div class="addCarVue">
-        <input class="inputText" type="text" placeholder="Brand" v-model="brand">
-        <input class="inputText" type="text" placeholder="Serial Number" v-model="serialNumber">
+        <input class="inputText" type="text" placeholder="Brand" v-model="carBrand">
+        <input class="inputText" type="text" placeholder="Serial Number" v-model="carSerialNumber">
 
-        <input id="create" type="button" value="Create" @click="createCar">
+        <a href='/'><input id="create" type="button" value="Create" @click="dataPrepare"></a>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name:'addCarVue',
     data: function() {
         return{
-            brand: '',
-            serialNumber: ''
+            carBrand: "",
+            carSerialNumber: "",
+            customerId: 1
         }
+    },
+    methods: {
+        dataPrepare(){
+            let car = {
+                carBrand: this.carBrand,
+                carSerialNumber: this.carSerialNumber,
+                customerId: this.customerId
+            }
+            console.log(car)
+            this.createCar(car)
+        },
+        createCar(car) {
+            axios
+            .post('http://localhost:3000/car', car)
+        }
+    },
+    mounted() {
+        let hash = window.location.hash.replace('#/','').replace('/car/add', '') 
+        this.customerId = parseInt(hash, 10)           
     }
 }
 </script>

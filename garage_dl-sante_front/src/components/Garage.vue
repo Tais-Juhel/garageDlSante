@@ -3,11 +3,13 @@
         <td class="brand">{{ brand }}</td>
         <td class="serialNumber">{{ serialNumber }}</td>
         <td class="editButton"><router-link class="editLink" :to="`/car/${id}`">Edit</router-link></td>
-        <td class="deleteButton" @click="deleteCar">Delete</td>
+        <td class="deleteButton"><button  @click="deleteCar">Delete</button></td>
     </tr>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'car',
     props: {
@@ -22,6 +24,16 @@ export default {
         serialNumber: {
             type: String,
             required: true
+        }
+    },
+    methods: {
+        deleteCar() {
+            console.log('toototot')
+
+            axios
+            .delete(`http://localhost:3000/car/${ this.id }`)
+
+            location.reload()
         }
     }
 }

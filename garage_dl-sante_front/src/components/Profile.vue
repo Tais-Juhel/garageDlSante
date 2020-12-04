@@ -3,26 +3,37 @@
         <table>
             <tr class="info">
                 <td class="label">Name:</td>
-                <td class="data">{{ name }}</td>
+                <td class="data">{{ customer.customerName }}</td>
                 <td class="updateButton" @click="updateName">Edit</td>
             </tr>
             <tr class="info">
                 <td class="label">First Name:</td>
-                <td class="data">{{ firstName }}</td>
+                <td class="data">{{ customer.customerFirstName }}</td>
                 <td class="updateButton" @click="updateFirstName">Edit</td>
             </tr>
         </table>
+        <button @click="updateCustomer">Comfirm</button>
+        <p id="comfirmMsg"></p>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'profileVue',
-    data: function() {
+    data() {
         return {
-            name: 'Franck',
-            firstName: 'Lorean'
+            customer: [],
+            userId: ''
         }
+    },
+    mounted() {
+        this.userId = window.location.hash.replace('#/','').replace('/profil', '')
+
+        axios
+        .get(`http://localhost:3000/customer/${this.userId}`, this.customer)
+        .then(res => {this.customer = res.data})
     },
     methods: {
         updateName() {
@@ -31,7 +42,7 @@ export default {
             if(prompt == null || prompt == ""){
                 return
             } else {
-                this.name = prompt
+                this.customer.customerName = prompt
             }
         },
         updateFirstName() {
@@ -40,8 +51,18 @@ export default {
             if(prompt == null || prompt == ""){
                 return
             } else {
-                this.firstName = prompt
+                this.customer.customerFirstName = prompt
             }
+        },
+        updateCustomer() {
+            document.getElementById('comfirmMsg').innerHTML = ""
+
+            axios
+            .put(`http://localhost:3000/customer/${ this.customer.customerId }`, this.customer)
+
+            setTimeout(() => { document.getElementById('comfirmMsg').innerHTML = "Your profile has been updated"}, 500);
+
+            location.reload()
         }
     }
 }
@@ -97,6 +118,17 @@ export default {
           color: white;
           border-radius: 5px;
       }
+  }
+
+  button{
+      margin: 0 auto;
+      margin-top: 30px;
+      height: 30px;
+      width: 100px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
   }
 }
 </style>

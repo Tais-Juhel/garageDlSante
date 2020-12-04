@@ -1,21 +1,39 @@
 <template>
-  <form id="registerVue" @submit="register">
+  <form id="registerVue">
     <div class="input">
-      <input id="username" type="text" placeholder="Username" v-model="name">
-      <input id="password" type="text" placeholder="Password" v-model="firstName">
+      <input id="name" type="text" placeholder="Name" v-model="name">
+      <input id="firstName" type="text" placeholder="First Name" v-model="firstName">
     </div>
 
-    <button class="submit" @click="submit">Register</button>
+    <button class="submit" @click="dataPrepare"><a href="/">Register</a></button>
   </form>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'registerVue',
   data: function() {
     return {
       name: '',
       firstName: ''
+    }
+  },
+  methods: {
+    dataPrepare() {
+      let customer = {
+        customerName: this.name,
+        customerFirstName: this.firstName
+      }
+      console.log(customer)
+      this.createCustomer(customer)
+    },
+    createCustomer(customer) {
+      axios
+      .post('http://localhost:3000/customer', customer)
+
+      location.reload()
     }
   }
 }
@@ -28,7 +46,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   width: 400px;
-  height: 500px;
+  height: 300px;
   box-shadow: 0 0 10px 0px lightgrey;
   flex-direction: column;
   align-content: center;
@@ -62,7 +80,7 @@ export default {
 
   .submit{
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 30px;
     width: 120px;
     height: 40px;
     font-size: 14px;

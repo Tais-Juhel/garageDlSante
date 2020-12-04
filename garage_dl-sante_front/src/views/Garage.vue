@@ -5,7 +5,8 @@
                 <GarageVue v-for="item in garage" :key="item" :id="item.carId" :brand="item.carBrand" :serialNumber="item.carSerialNumber"/>
             </table>
 
-            <router-link class="addCar" to="/car/add">Add +</router-link>
+            <p v-if="garage[0] == null">You have no cars in your garage</p>
+            <router-link class="addCar" :to="`/${ userId }/car/add`">Add +</router-link>
         </div>
     </div>
 </template>
@@ -20,12 +21,15 @@ export default {
     components: { GarageVue },
     data() {
         return {
-            garage: []
+            garage: [],
+            userId: ''
         }
     },
     mounted () {
+        this.userId = window.location.hash.replace('#/', '').replace('/garage', '')
+
         axios
-        .get('http://localhost:3000/car/')
+        .get(`http://localhost:3000/customer/${this.userId}/car`)
         .then((res) => {this.garage = res.data})
   }
 }
